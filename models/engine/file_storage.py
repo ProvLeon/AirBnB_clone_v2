@@ -4,16 +4,19 @@ import json
 
 
 class FileStorage:
-    """This class manages storage of hbnb models in JSON format"""
+    """This class manages storage of
+    hbnb models in JSON format"""
     __file_path = 'file.json'
     __objects = {}
 
     def all(self, cls=None):
-        """Return a dictionary or list of objects currently in storage."""
-        if cls == None:
+        """Return a dictionary or
+        list of objects currently in storage."""
+        if cls is None:
             return FileStorage.__objects
         else:
-            object_groupFilter = {key: value for key, value in FileStorage.__objects.items()}
+            object_groupFilter = {key: value for key,
+                                  value in FileStorage.__objects.items()}
             return object_groupFilter
 
     def new(self, obj):
@@ -31,7 +34,7 @@ class FileStorage:
 
     def delete(self, obj=None):
         """Deletes obj from __objects"""
-        if obj == None:
+        if obj is None:
             pass
         else:
             key = f"{type(obj).__name__}.{obj.id}"
