@@ -64,3 +64,7 @@ class FileStorage:
     def close(self):
         """Reloads storage dictionary from file"""
         self.reload()
+
+
+if __name__ == "__main__":
+    FileStorage()
