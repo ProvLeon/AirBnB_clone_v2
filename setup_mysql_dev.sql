@@ -16,7 +16,7 @@ GRANT ALL PRIVILEGES
 -- Grant SELECT privilege on performance_schema to the user
 GRANT SELECT 
   ON `performance_schema`.* 
-  TO 'hbnb_dev'@'localhost'
+  TO 'hbnb_dev'@'localhost';
 
 -- FLUSH applies all the privilege changes instantly
 FLUSH PRIVILEGES;
