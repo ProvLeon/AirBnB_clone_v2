@@ -15,9 +15,9 @@ class FileStorage:
         if cls is None:
             return FileStorage.__objects
         else:
-            object_groupFilter = {key: value for key,
-                                  value in FileStorage.__objects.items()}
-            return object_groupFilter
+            object_group_filter = {key: value for key,
+                                   value in FileStorage.__objects.items()}
+            return object_group_filter
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -38,8 +38,8 @@ class FileStorage:
             pass
         else:
             key = f"{type(obj).__name__}.{obj.id}"
-            if key in self.__objects:
-                del self.__objects[key]
+            if key in FileStorage.__objects:
+                del FileStorage.__objects[key]
 
     def reload(self):
         """Loads storage dictionary from file"""
