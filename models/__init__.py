@@ -7,7 +7,7 @@ import os
 
 storage_type = os.environ.get('HBNB_TYPE_STORAGE', 'file')
 
-if storage_type == 'db':
+if storage_type == "db":
     from models.engine.db_storage import DBStorage as storage
 
 else:

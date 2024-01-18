@@ -5,6 +5,9 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 import os
 
+storage_type = os.environ.get("HBNB_TYPE_STORAGE")
+
+
 class State(BaseModel):
     """ State class """
     __tablename__ = "states"
