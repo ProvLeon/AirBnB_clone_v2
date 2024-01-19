@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """ Module for testing file storage"""
-
-
 import unittest
 from models.base_model import BaseModel
 from models import storage
@@ -13,7 +11,9 @@ class test_fileStorage(unittest.TestCase):
 
     def setUp(self):
         """ Set up test environment """
-        del_list = list(storage._FileStorage__objects.keys())
+        del_list = []
+        for key in storage._FileStorage__objects.keys():
+            del_list.append(key)
         for key in del_list:
             del storage._FileStorage__objects[key]
 
@@ -21,7 +21,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except Exception as new:
+        except:
             pass
 
     def test_obj_list_empty(self):

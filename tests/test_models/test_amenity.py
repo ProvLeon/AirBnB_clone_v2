@@ -1,32 +1,19 @@
 #!/usr/bin/python3
-"""Tests for `amenity` model"""
-import os
-import unittest
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.amenity import Amenity
 
 
-@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-                 "test only for FileStorage")
-class TestAmenity(unittest.TestCase):
-    def test_attributes(self):
-        amenity = Amenity()
-        self.assertTrue(hasattr(amenity, 'name'))
-        self.assertEqual(amenity.name, "")
+class test_Amenity(test_basemodel):
+    """ """
 
-    def test_init(self):
-        amenity = Amenity(name="Swimming Pool")
-        self.assertEqual(amenity.name, "Swimming Pool")
-        self.assertEqual(amenity.__class__.__name__, "Amenity")
-        self.assertTrue(hasattr(amenity, 'id'))
-        self.assertTrue(hasattr(amenity, 'created_at'))
-        self.assertTrue(hasattr(amenity, 'updated_at'))
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = "Amenity"
+        self.value = Amenity
 
-    def test_str_representation(self):
-        amenity = Amenity(name="Peter")
-        string = str(amenity)
-        self.assertIn(f"[Amenity] ({amenity.id})", string)
-        self.assertIn("'name': 'Peter'", string)
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_name2(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.name), str)
