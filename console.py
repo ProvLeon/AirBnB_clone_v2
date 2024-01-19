@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ Console Module """
+
+
 import cmd
 import sys
 import re
@@ -120,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         try:
-            args = re.split("\s|=", args)
+            args = re.split(r"\s|=", args)
             new_instance = eval(args[0])()
 
             for idx in range(1, len(args), 2):
@@ -130,12 +132,12 @@ class HBNBCommand(cmd.Cmd):
                     new_instance.__getattribute__(key)
                 except AttributeError:
                     continue
-                if re.search("^\".*\"$", value) is not None:
+                if re.search(r"^\".*\"$", value) is not None:
                     value = value.replace("_", " ")
                     value = value.replace("\"", "")
                 elif "." in value:
                     value = float(value)
-                elif re.search("\d.*", value) is not None:
+                elif re.search(r"\d.*", value) is not None:
                     value = int(value)
                 else:
                     continue
