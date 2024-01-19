@@ -34,7 +34,7 @@ class TestCity(unittest.TestCase):
         """Test the string representation of a City instance"""
         city = City(name="San Francisco", state_id="CA")
         string = str(city)
-        self.assertIn("[City] ({})".format(city.id), string)
+        self.assertIn(f"[City] ({city.id})", string)
         self.assertIn("'name': 'San Francisco'", string)
         self.assertIn("'state_id': 'CA'", string)
 

@@ -39,7 +39,7 @@ class TestState(unittest.TestCase):
         """Test the string representation of a State instance"""
         state = State(name="California")
         string = str(state)
-        self.assertIn("[State] ({})".format(state.id), string)
+        self.assertIn(f"[State] ({state.id})", string)
         self.assertIn("'name': 'California'", string)
 
     def test_attributes_default(self):

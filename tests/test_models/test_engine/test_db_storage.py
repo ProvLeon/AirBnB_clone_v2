@@ -64,7 +64,7 @@ class testDBStorage(unittest.TestCase):
         state.save()
         all_stored = models.storage.all()
         models.storage.delete(state)
-        self.assertTrue(all_stored["State." + state.id])
+        self.assertTrue(all_stored[f"State.{state.id}"])
 
 
 if __name__ == "__main__":

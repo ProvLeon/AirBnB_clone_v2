@@ -59,7 +59,7 @@ class TestPlace(unittest.TestCase):
         """Test the string representation of a Place instance"""
         place = Place(name="Cozy House", city_id="city123", user_id="user456")
         string = str(place)
-        self.assertIn("[Place] ({})".format(place.id), string)
+        self.assertIn(f"[Place] ({place.id})", string)
         self.assertIn("'name': 'Cozy House'", string)
         self.assertIn("'city_id': 'city123'", string)
         self.assertIn("'user_id': 'user456'", string)

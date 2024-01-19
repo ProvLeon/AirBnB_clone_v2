@@ -24,7 +24,7 @@ class TestAmenity(unittest.TestCase):
     def test_str_representation(self):
         amenity = Amenity(name="Peter")
         string = str(amenity)
-        self.assertIn("[Amenity] ({})".format(amenity.id), string)
+        self.assertIn(f"[Amenity] ({amenity.id})", string)
         self.assertIn("'name': 'Peter'", string)
 
 

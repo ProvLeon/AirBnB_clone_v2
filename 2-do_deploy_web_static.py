@@ -18,17 +18,18 @@ def do_deploy(archive_path):
         filename = archive_path.split('/')[-1]
         fname = filename.split('.')[0]
 
-        put(archive_path, '/tmp/{}'.format(filename))
-        run('mkdir -p /data/web_static/releases/{}/'.format(fname))
-        run('tar -xzf /tmp/{} -C'
-            '/data/web_static/releases/{}/'.format(filename, fname))
-        run('rm /tmp/{}'.format(filename))
-        run('mv /data/web_static/releases/{}/web_static/*'
-            '/data/web_static/releases/{}/'.format(fname, fname))
-        run('rm -rf /data/web_static/releases/{}/web_static'.format(fname))
+        put(archive_path, f'/tmp/{filename}')
+        run(f'mkdir -p /data/web_static/releases/{fname}/')
+        run(f'tar -xzf /tmp/{filename} -C/data/web_static/releases/{fname}/')
+        run(f'rm /tmp/{filename}')
+        run(
+            f'mv /data/web_static/releases/{fname}/web_static/*\
+                    /data/web_static/releases/{fname}/'
+        )
+        run(f'rm -rf /data/web_static/releases/{fname}/web_static')
         run('rm -rf /data/web_static/current')
-        run('ln -s /data/web_static/releases/{}/'
-            '/data/web_static/current'.format(fname))
+        run(f'ln -s /data/web_static/releases/{fname}\
+                //data/web_static/current')
 
         print('New version deployed!')
         return True

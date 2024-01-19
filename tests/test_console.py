@@ -41,7 +41,7 @@ class test_console(unittest.TestCase):
         self.capt_out.close()
         self.capt_out = StringIO()
         sys.stdout = self.capt_out
-        console.onecmd("show User " + user_id)
+        console.onecmd(f"show User {user_id}")
         x = (self.capt_out.getvalue())
         sys.stdout = self.backup
         self.assertTrue(str is type(x))

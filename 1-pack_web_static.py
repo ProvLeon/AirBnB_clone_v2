@@ -16,8 +16,5 @@ def do_pack():
     if not os.path.exists("versions"):
         os.makedirs("versions")
 
-    result = local("tar -czvf {} web_static".format(archive_path))
-    if result.succeeded:
-        return archive_path
-    else:
-        return None
+    result = local(f"tar -czvf {archive_path} web_static")
+    return archive_path if result.succeeded else None

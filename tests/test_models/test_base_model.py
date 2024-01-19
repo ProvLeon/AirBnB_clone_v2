@@ -25,12 +25,10 @@ class TestBaseModel(unittest.TestCase):
         """Test the string representation of a BaseModel instance"""
         base_model = BaseModel()
         string = str(base_model)
-        self.assertIn("[BaseModel] ({})".format(base_model.id), string)
-        self.assertIn("'id': '{}'".format(base_model.id), string)
-        self.assertIn("'created_at': {}".format(
-            repr(base_model.created_at)), string)
-        self.assertIn("'updated_at': {}".format(
-            repr(base_model.updated_at)), string)
+        self.assertIn(f"[BaseModel] ({base_model.id})", string)
+        self.assertIn(f"'id': '{base_model.id}'", string)
+        self.assertIn(f"'created_at': {repr(base_model.created_at)}", string)
+        self.assertIn(f"'updated_at': {repr(base_model.updated_at)}", string)
 
     def test_save(self):
         """Test the save method of a BaseModel instance"""

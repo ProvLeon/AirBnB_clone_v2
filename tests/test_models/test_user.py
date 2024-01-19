@@ -45,7 +45,7 @@ class TestUser(unittest.TestCase):
         """Test the string representation of a User instance"""
         user = User(email="test@example.com", password="password")
         string = str(user)
-        self.assertIn("[User] ({})".format(user.id), string)
+        self.assertIn(f"[User] ({user.id})", string)
         self.assertIn("'email': 'test@example.com'", string)
 
     def test_password_encryption(self):

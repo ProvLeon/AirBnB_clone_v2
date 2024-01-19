@@ -43,7 +43,7 @@ class TestReview(unittest.TestCase):
         review = Review(text="Great place",
                         place_id="place123", user_id="user456")
         string = str(review)
-        self.assertIn("[Review] ({})".format(review.id), string)
+        self.assertIn(f"[Review] ({review.id})", string)
         self.assertIn("'text': 'Great place'", string)
         self.assertIn("'place_id': 'place123'", string)
         self.assertIn("'user_id': 'user456'", string)
