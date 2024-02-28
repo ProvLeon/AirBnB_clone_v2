@@ -1,30 +1,56 @@
 #!/usr/bin/python3
 """
-Fabric script based on the file 1-pack_web_static.py that distributes an
-archive to the web servers
+Generate .tgz files and deploys it to
+web servers
 """
 
-from fabric.api import put, run, env
-from os.path import exists
-env.hosts = ['142.44.167.228', '144.217.246.195']
+from time import strftime
+from fabric.api import env, run, put, local
+import os
+
+env.hosts = ['100.25.162.172', '54.152.165.14']
+env.user = "ubuntu"
+
+
+def do_pack():
+    """Generate a .tgz file of web_static folder"""
+    try:
+        # create versions folder
+        local("mkdir -p versions")
+        # compress to versions folder
+        time = f"{strftime('%Y%M%d%H%M%S')}"
+        local(f"tar -cvzf versions/web_static_{time}.tgz web_static/")
+        # return filename
+        return f'verizon/web_static_{time}.tgz'
+    except Exception:
+        return None
 
 
 def do_deploy(archive_path):
-    """distributes an archive to the web servers"""
-    if exists(archive_path) is False:
-        return False
-    try:
-        file_n = archive_path.split("/")[-1]
-        no_ext = file_n.split(".")[0]
-        path = "/data/web_static/releases/"
-        put(archive_path, '/tmp/')
-        run('mkdir -p {}{}/'.format(path, no_ext))
-        run('tar -xzf /tmp/{} -C {}{}/'.format(file_n, path, no_ext))
-        run('rm /tmp/{}'.format(file_n))
-        run('mv {0}{1}/web_static/* {0}{1}/'.format(path, no_ext))
-        run('rm -rf {}{}/web_static'.format(path, no_ext))
-        run('rm -rf /data/web_static/current')
-        run('ln -s {}{}/ /data/web_static/current'.format(path, no_ext))
+    """
+    Deploys archive to both servers
+    """
+    if os.path.exists(archive_path):
+        filetag = archive_path.split("/")[-1]
+        tag = filetag.split(".")[0]
+        new_path = f"/data/web_static/releases/{tag}/"
+        sym_link = "/data/web_static/current"
+        # upload file to /tmp/
+        put(archive_path, f"/tmp/{filetag}")
+        # create target directory
+        run(f"sudo mkdir -p {new_path}")
+        # uncompress folders to target_directory
+        run(f"sudo tar -xzf /tmp/{filetag} -C {new_path}")
+        # delete archive
+        run(f"sudo rm /tmp/{filetag}")
+        # move files from web_static to root of target folder
+        run(f"sudo mv {new_path}web_static/* {new_path}")
+        # delete empty web_static directory
+        run(f"sudo rm -rf {new_path}web_static")
+        # delete sym link /data/web_static/current
+        run(f"sudo rm -rf {sym_link}")
+        # create new sym link
+        run(f"sudo ln -s {new_path} {sym_link}")
+        print("New version deployed!")
         return True
-    except Exception as e:
-        return False
+    return False
