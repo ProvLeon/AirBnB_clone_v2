@@ -8,7 +8,7 @@ from time import strftime
 from fabric.api import env, run, put, local
 import os
 
-env.hosts = ['100.25.162.172', '54.152.165.14']
+env.hosts = ['54.157.134.178', '54.175.136.136']
 env.user = "ubuntu"
 
 
